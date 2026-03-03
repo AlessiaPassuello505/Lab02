@@ -15,6 +15,7 @@ while(True):
         print("Ok quale parola devo aggiungere?")
         parola=input("Inserisci parola aliena e la sua traduzione")
         t.handleAdd(parola)
+        print("Aggiunta")
 
     if int(txtIn) == 2:
         print("Quale parola vuoi cercare?")

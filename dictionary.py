@@ -15,7 +15,7 @@ class Dictionary:
     def addWord(self,tupla):
         aliena=tupla[0].lower()
         umane=tupla[1].lower()
-        if aliena.isAlpha() and umane.isAlpha:
+        if aliena.isalpha() and umane.isalpha:
             self.dati[aliena.lower()]=umane.lower()
             with open("dictionary.txt", "a", encoding="utf-8") as f:
                 f.write(f"{aliena.lower()} {umane.lower()}\n ")
