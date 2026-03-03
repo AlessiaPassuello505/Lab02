@@ -1,12 +1,43 @@
+import re
 class Dictionary:
-    def __init__(self):
-        pass
+    def __init__(self,nomefile="dictionary.txt"):
+        self.nome=nomefile
+        self.dati={}
+        try:
+            with open(nomefile,"r", encoding="utf-8") as f:
+                for riga in f:
+                    campi=riga.strip().split()
+                    if len(campi)==2:
+                        self.dati[campi[0].lower()]=campi[1].lower()
+        except FileNotFoundError:
+            pass
 
-    def addWord(self):
-        pass
+    def addWord(self,tupla):
+        aliena=tupla[0].lower()
+        umane=tupla[1].lower()
+        if aliena.isAlpha() and umane.isAlpha:
+            self.dati[aliena.lower()]=umane.lower()
+            with open("dictionary.txt", "a", encoding="utf-8") as f:
+                f.write(f"{aliena.lower()} {umane.lower()}\n ")
 
-    def translate(self):
-        pass
 
-    def translateWordWildCard(self):
-        pass
+    def translate(self, aliena):
+        return self.dati.get(aliena.lower(), "Parola non trovata")
+
+
+    def translateWordWildCard(self,aliena):
+        aliena=aliena.replace("?",".")
+        pattern=re.compile(aliena)
+        for chiave in self.dati.keys():
+            if pattern.match(chiave):
+                return self.dati[chiave]
+
+
+
+
+
+
+
+
+
+
