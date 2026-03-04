@@ -15,10 +15,15 @@ class Dictionary:
     def addWord(self,tupla):
         aliena=tupla[0].lower()
         umane=tupla[1].lower()
-        if aliena.isalpha() and umane.isalpha:
-            self.dati[aliena.lower()]=umane.lower()
-            with open("dictionary.txt", "a", encoding="utf-8") as f:
-                f.write(f"{aliena.lower()} {umane.lower()}\n ")
+        if aliena.isalpha() and umane.isalpha():
+            if aliena.lower() not in self.dati:
+                self.dati[aliena.lower()]=umane.lower()
+                with open(self.nome, "a", encoding="utf-8") as f:
+                    f.write(f"{aliena.lower()} {umane.lower()}\n ")
+                return True
+            else:
+                return False
+        return False
 
 
     def translate(self, aliena):
@@ -28,9 +33,12 @@ class Dictionary:
     def translateWordWildCard(self,aliena):
         aliena=aliena.replace("?",".")
         pattern=re.compile(aliena)
+        mylist=[]
         for chiave in self.dati.keys():
             if pattern.match(chiave):
-                return self.dati[chiave]
+                mylist.append(self.dati[chiave])
+        return mylist
+
 
 
 

@@ -20,7 +20,11 @@ class Translator:
 
     def handleAdd(self, entry):
         # entry is a tuple <parola_aliena> <traduzione1 traduzione2 ...>
-        self.dati.addWord(entry)
+        tupla=entry.split()
+        if len(tupla)>=2:
+            self.dati.addWord(tupla)
+            return True
+        return False
 
 
     def handleTranslate(self, query):
@@ -31,5 +35,5 @@ class Translator:
 
     def handleWildCard(self,query):
         # query is a string with a ? --> <par?la_aliena>
-
-        pass
+        risposta=self.dati.translateWordWildCard(query)
+        return risposta
